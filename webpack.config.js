@@ -9,7 +9,7 @@ module.exports = env => ({
         path: path.join(__dirname, 'dist')
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.css', '.scss']
+        extensions: ['.js', '.jsx', '.css', '.scss', '.png', '.jpg', '.jpeg', 'gif']
     },
     module: {
         rules: [
@@ -22,6 +22,11 @@ module.exports = env => ({
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                exclude: /node_modules/,
+                use: ['file-loader']
             }
         ]
     },

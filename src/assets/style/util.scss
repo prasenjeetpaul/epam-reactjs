@@ -1,0 +1,15 @@
+@import "variables";
+
+span.logo {
+    color: $primary;
+}
+
+.clickable {
+    &:hover {
+        cursor: pointer !important;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

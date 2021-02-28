@@ -1,0 +1,18 @@
+@import "variables";
+@import "util";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  background-color: $dark;
+  color: $white;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}

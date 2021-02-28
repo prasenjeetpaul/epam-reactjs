@@ -1,0 +1,163 @@
+@import "../../assets/style/variables.scss";
+@import "../../assets/style/util.scss";
+
+main {
+    flex: 1 0 auto;
+    padding: 10px 50px;
+
+    div.main-content {
+        margin: 0px auto;
+        max-width: $default-screen-size;
+
+        div.main-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-bottom: 5px;
+            border-bottom: 1px solid $grey;
+
+            ul {
+                margin: 10px 0px;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                gap: 20px;
+
+                li {
+                    color: $white;
+                    display: inline-block;
+                }
+
+                li.selected {
+                    padding-bottom: 10px;
+                    border-bottom: 3px solid $primary;
+                }
+            }
+
+            div {
+                margin: 10px 0px;
+                padding: 0;
+
+                span {
+                    color: $light;
+                }
+
+                select {
+                    background-color: $dark;
+                    margin-left: 10px;
+                    padding: 0px 10px;
+                    border: none;
+                    outline: none;
+                    color: $white;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        span.movie-count {
+            display: block;
+            margin: 20px 0px;
+        }
+
+        div.movie-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+
+            div.movie-item {
+                padding-bottom: 10px;
+                border-bottom: 3px solid $dark;
+                transition: border-bottom 300ms ease;
+                position: relative;
+
+                &:hover {
+                    border-bottom: 3px solid $primary;
+                }
+
+                img {
+                    height: 420px;
+                    width: 300px;
+                }
+
+                div.movie-info {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-top: 10px;
+
+                    div {
+                        h3.movie-title {
+                            padding-bottom: 5px;
+                            margin: 0px;
+                            color: $white;
+                        }
+
+                        span.movie-genre {
+                            font-size: 12px;
+                            color: $white;
+                        }
+                    }
+
+                    span.movie-year {
+                        height: 14px;
+                        padding: 5px 10px;
+                        font-size: 12px;
+                        color: $white;
+                        border: 1px solid $light;
+                        border-radius: 5px;
+                    }
+                }
+
+                div.movie-item-action-logo svg {
+                    fill: white;
+                    background-color: $dark;
+                    border-radius: 50%;
+                    width: 15px;
+                    height: 15px;
+                    position: absolute;
+                    padding: 10px;
+                    right: 10px;
+                    top: 10px;
+                }
+
+                div.movie-item-action {
+                    position: absolute;
+                    background-color: $dark;
+                    right: 10px;
+                    top: 10px;
+                    border-radius: 2px;
+                    display: flex;
+                    align-items: flex-end;
+                    flex-direction: column;
+                    padding-bottom: 10px;
+
+                    span.close-button {
+                        font-size: 14px;
+                        margin: 10px 15px 5px 0px;
+
+                        &:hover {
+                            color: $primary;
+                        }
+                    }
+
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+
+                        li {
+                            font-size: 14px;
+                            width: 120px;
+                            padding: 10px 20px;
+
+                            &:hover {
+                                background-color: $primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
