@@ -1,15 +1,18 @@
 import React from 'react';
 import './header.scss';
+import { ModalService } from '../Modal/modal-service';
 
 export const Header = () => (
     <header>
         <div className="header-content">
             <nav>
-                <span className="logo clickable">
+                <a href="./" className="logo clickable">
                     <b>netflix</b>roulette
-                </span>
+                </a>
                 <div className="nav-action">
-                    <button className="add-movie-button clickable">
+                    <button className="add-movie-button clickable" onClick={() => {
+                        ModalService.openAddMovieModal()
+                    }}>
                         + ADD MOVIE
                     </button>
                 </div>
