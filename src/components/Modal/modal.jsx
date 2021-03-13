@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './modal.scss';
 import { ModalService } from './modal-service';
 
+export const Modal = () => {
+    const [modalState, setModalState] = useState({
+        isModalVisible: false,
+        ModalComponent: null,
+        modalProps: null
+    });
 
-export class Modal extends React.Component {
+    useEffect(() => {
+        const sub = ModalService.modal.subscribe(modalData => {
+            if (modalData.isModalVisible) {
+                document.body.classList.add('disable-scroll');
+            } else {
+                document.body.classList.remove('disable-scroll');
+            }
+            setModalState(modalData);
+        });
+        return () => sub.unsubscribe();
+    }, []);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isModalVisible: false,
-            ModalComponent: null
-        }
-    }
-
-    componentWillMount() {
-        ModalService.modal.subscribe(({ isModalVisible, ModalComponent, props }) => this.setState({ isModalVisible, ModalComponent, props }));
-    }
-
-    render() {
-        const { isModalVisible, ModalComponent, props } = this.state;
-        if (!isModalVisible) {
-            document.body.classList.remove('disable-scroll');
-            return null;
-        }
-        document.body.classList.add('disable-scroll');
-        return (
-            <section className="modal-container">
-                {isModalVisible ? <ModalComponent {...props} /> : null}
-            </section>
-        )
-    }
+    return modalState.isModalVisible && (
+        <section className="modal-container">
+            <modalState.ModalComponent {...modalState.modalProps} />
+        </section>
+    );
 }

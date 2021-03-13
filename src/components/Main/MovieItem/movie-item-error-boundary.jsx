@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { MovieItemData, MovieItem } from './movie-item';
 
 export class MovieItemErrorBoundary extends Component {
 
@@ -15,16 +14,12 @@ export class MovieItemErrorBoundary extends Component {
 
     render() {
         if (this.state.hasError) {
-            const errorMovieItem = new MovieItemData(
-                (new Date()).getTime(),
-                'Server Error',
-                [],
-                '',
-                'https://image.freepik.com/free-vector/glitch-error-404-page_23-2148105404.jpg',
+            return (
+                <div className="movie-item clickable">
+                    <img src='https://image.freepik.com/free-vector/glitch-error-404-page_23-2148105404.jpg' />
+                </div>
             );
-            return <MovieItem movieItem={errorMovieItem} hasError={true} />
         }
-
         return this.props.children;
     }
 }

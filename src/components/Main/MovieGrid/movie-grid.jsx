@@ -1,7 +1,7 @@
 import React from 'react'
 import { MovieItem, MovieItemErrorBoundary, MovieItemData } from '../MovieItem'
 
-export function MovieGrid() {
+export const MovieGrid = () => {
     const movieList = [
         new MovieItemData(
             '1',
@@ -20,8 +20,8 @@ export function MovieGrid() {
         new MovieItemData(
             '2',
             'The Avengers',
-            ['Action', 'Adventure', 'Sci-Fi'],
-            // null, //this will cause an error which will be handled in Error Boundary
+            // ['Action', 'Adventure', 'Sci-Fi'],
+            null, //this will cause an error which will be handled in Error Boundary
             '2012',
             'https://www.joblo.com/assets/images/oldsite/posters/images/full/02_AVG_Online1Sht_UK2_rgb_thumb.jpg',
         ),
@@ -52,9 +52,9 @@ export function MovieGrid() {
             <span className="movie-count"><b>{movieList.length}</b> movies found</span>
             <div className="movie-grid">
                 {movieList.map(movieItem => <MovieItemErrorBoundary key={movieItem.id}>
-                    <MovieItem movieItem={movieItem} key={movieItem.id} />
+                    <MovieItem movieItem={movieItem} />
                 </MovieItemErrorBoundary>)}
             </div>
         </>
-    )
+    );
 }

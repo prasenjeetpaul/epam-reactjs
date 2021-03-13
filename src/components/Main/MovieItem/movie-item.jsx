@@ -1,35 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MovieActionMenu } from '../MovieActionMenu';
+import { MovieItemData } from './movie-item.model';
 
-export function MovieItem(props) {
+export const MovieItem = ({ movieItem }) => {
     const [inHover, setHover] = useState(false);
-
     return (
         <div className="movie-item clickable"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}>
-            <img src={props.movieItem.posterURL} />
+            <img src={movieItem.posterURL} />
             <div className="movie-info">
                 <div>
-                    <h3 className="movie-title">{props.movieItem.movieTitle}</h3>
-                    <span className="movie-genre">{props.movieItem.movieGenre.join(', ')}</span>
+                    <h3 className="movie-title">{movieItem.movieTitle}</h3>
+                    <span className="movie-genre">{movieItem.movieGenre.join(', ')}</span>
                 </div>
-                {!props.hasError && <span className="movie-year">{props.movieItem.releaseDate}</span>}
+                <span className="movie-year">{movieItem.releaseDate}</span>
             </div>
-            {inHover && !props.hasError && <MovieActionMenu />}
+            {inHover && <MovieActionMenu />}
         </div>
     );
 }
 
 MovieItem.propTypes = {
-    movieItem: PropTypes.instanceOf(MovieItemData)
-}
-
-export function MovieItemData(id = 0, movieTitle = '', movieGenre = [], releaseDate = '', posterURL = '') {
-    this.id = id;
-    this.movieTitle = movieTitle;
-    this.movieGenre = movieGenre;
-    this.releaseDate = releaseDate;
-    this.posterURL = posterURL;
+    movieItem: PropTypes.instanceOf(MovieItemData).isRequired,
 }

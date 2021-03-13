@@ -7,4 +7,4 @@ export const Footer = () => (
             <b>netflix</b>roulette
         </span>
     </footer>
-)
+);

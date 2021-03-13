@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.scss';
-import { ModalService } from '../Modal/modal-service';
+import { ModalService } from '../Modal';
 
 export const Header = () => (
     <header>

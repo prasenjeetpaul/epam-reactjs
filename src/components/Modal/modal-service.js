@@ -1,4 +1,4 @@
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { AddMovieModal } from "./AddMovieModal";
 import { UpdateMovieModal } from "./UpdateMovieModal";
 import { DeleteMovieModal } from "./DeleteMovieModal";
@@ -26,36 +26,34 @@ class ModalManagementService {
         return this._modal.asObservable();
     }
 
-    constructor() {
+    constructor() { }
 
-    }
-
-    openAddMovieModal(props) {
+    openAddMovieModal(modalProps) {
         this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.ADD_MOVIE_MODAL), props });
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.ADD_MOVIE_MODAL), modalProps });
         return this._result.asObservable();
     }
 
-    openUpdateMovieModal(props) {
+    openUpdateMovieModal(modalProps) {
         this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.UPDATE_MOVIE_MODAL), props });
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.UPDATE_MOVIE_MODAL), modalProps });
         return this._result.asObservable();
     }
 
     openDeleteMovieModal() {
         this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.DELETE_MOVIE_MODAL), props: null });
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.DELETE_MOVIE_MODAL), modalProps: null });
         return this._result.asObservable();
     }
 
     openSuccessModal(message) {
         this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.SUCCESS_MODAL), props: { message } });
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.SUCCESS_MODAL), modalProps: { message } });
         return this._result.asObservable();
     }
 
     closeModal() {
-        this._modal.next({ isModalVisible: false, ModalComponent: null })
+        this._modal.next({ isModalVisible: false, ModalComponent: null, modalProps: null })
     }
 
     emitResult(result) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { ModalService } from '../../Modal/modal-service';
+import { ModalService } from '../../Modal';
 
-export function MovieActionMenu() {
+export const MovieActionMenu = () => {
     const [isMenuVisible, setMenuVisible] = useState(false);
 
     return (
@@ -27,5 +27,5 @@ export function MovieActionMenu() {
                 </ul>
             </div>
         </React.Fragment>
-    )
+    );
 }

@@ -5,7 +5,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { Modal } from "./Modal";
 
-export default function App() {
+export const App = () => {
     return (
         <>
             <Header />
