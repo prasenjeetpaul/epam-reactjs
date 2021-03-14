@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { MovieActionMenu } from '../MovieActionMenu';
 import { MovieItemData } from './movie-item.model';
+import { store, REDUCER_ACTIONS } from '../../store';
 
 export const MovieItem = ({ movieItem }) => {
     const [inHover, setHover] = useState(false);
+    const { dispatch } = useContext(store);
     return (
-        <div className="movie-item clickable"
+        <div className="movie-item clickable" onClick={() => dispatch({ type: REDUCER_ACTIONS.UPDATE_SELECTED_MOVIE, payload: movieItem })}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}>
             <img src={movieItem.posterURL} />

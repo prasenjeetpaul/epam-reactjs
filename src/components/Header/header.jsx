@@ -1,29 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './header.scss';
-import { ModalService } from '../Modal';
+import { MovieSearch } from './MovieSearch';
+import { MovieDetail } from './MovieDetail';
+import { HeaderNav } from './HeaderNav';
+import { store } from '../store';
 
-export const Header = () => (
-    <header>
-        <div className="header-content">
-            <nav>
-                <a href="./" className="logo clickable">
-                    <b>netflix</b>roulette
-                </a>
-                <div className="nav-action">
-                    <button className="add-movie-button clickable" onClick={() => {
-                        ModalService.openAddMovieModal()
-                    }}>
-                        + ADD MOVIE
-                    </button>
-                </div>
-            </nav>
-            <div>
-                <h1>FIND YOUR MOVIE</h1>
-                <div>
-                    <input type="text" placeholder="What do you want to search?" />
-                    <button className="clickable">SEARCH</button>
-                </div>
+export const Header = () => {
+    const { state: { selectedMovieItem } } = useContext(store);
+    return (
+        <header className={selectedMovieItem ? 'dark-bg' : null}>
+            <div className="header-content">
+                <HeaderNav />
+                {selectedMovieItem ? <MovieDetail movieItem={selectedMovieItem} /> : <MovieSearch />}
             </div>
-        </div>
-    </header>
-);
+        </header>
+    );
+}

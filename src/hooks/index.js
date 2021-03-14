@@ -1,1 +1,1 @@
-export * from './constructor-hook';
+export * from './constructor.hook';
