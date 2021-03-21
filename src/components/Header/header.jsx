@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './header.scss';
 import { MovieSearch } from './MovieSearch';
 import { MovieDetail } from './MovieDetail';
 import { HeaderNav } from './HeaderNav';
-import { store } from '../store';
+import { connect } from 'react-redux';
 
-export const Header = () => {
-    const { state: { selectedMovieItem } } = useContext(store);
+const Header = ({ selectedMovieItem }) => {
     return (
         <header className={selectedMovieItem ? 'dark-bg' : null}>
             <div className="header-content">
@@ -16,3 +15,9 @@ export const Header = () => {
         </header>
     );
 }
+
+const mapStateToProps = ({ selectedMovieItem }) => ({ selectedMovieItem })
+
+const component = connect(mapStateToProps)(Header);
+
+export { component as Header };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ModalService } from '../../Modal';
 
-export const MovieActionMenu = () => {
+export const MovieActionMenu = ({ movieItem }) => {
     const [isMenuVisible, setMenuVisible] = useState(false);
 
     return (
@@ -22,8 +22,8 @@ export const MovieActionMenu = () => {
                     </svg>
                 </div>
                 <ul>
-                    <li onClick={event => { event.stopPropagation(); ModalService.openUpdateMovieModal() }}>Edit</li>
-                    <li onClick={event => { event.stopPropagation(); ModalService.openDeleteMovieModal() }}>Delete</li>
+                    <li onClick={event => { event.stopPropagation(); ModalService.openUpdateMovieModal(movieItem) }}>Edit</li>
+                    <li onClick={event => { event.stopPropagation(); ModalService.openDeleteMovieModal(movieItem.id) }}>Delete</li>
                 </ul>
             </div>
         </React.Fragment>

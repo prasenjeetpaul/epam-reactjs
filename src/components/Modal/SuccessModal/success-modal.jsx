@@ -1,7 +1,7 @@
 import React from 'react';
 import { ModalService } from '../modal-service';
 
-export const SuccessModal = ({ message }) => (
+export const SuccessModal = ({ isSuccess, message }) => (
     <div className="modal-content">
         <div className="modal-action">
             <div className="modal-close-icon clickable" onClick={() => ModalService.closeModal()}>
@@ -13,14 +13,13 @@ export const SuccessModal = ({ message }) => (
         </div>
         <div className="modal-body">
             <div className="center">
-                <svg className="success-icon" xmlns="http://www.w3.org/2000/svg"
-                    version="1.1" id="Capa_1" x="0px" y="0px"
-                    viewBox="0 0 455.111 455.111">
+                <svg className="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 455.111 455.111">
                     <circle cx="227.556" cy="227.556" r="227.556" />
-                    <path d="M351.289,162.133L203.378,324.267c-9.956,11.378-27.022,11.378-36.978,0l-62.578-69.689  c-8.533-9.956-8.533-25.6,1.422-35.556c9.956-8.533,25.6-8.533,35.556,1.422l44.089,49.778l129.422-140.8  c9.956-9.956,25.6-11.378,35.556-1.422C359.822,136.533,359.822,153.6,351.289,162.133z" />
+                    {isSuccess && <path d="M351.289,162.133L203.378,324.267c-9.956,11.378-27.022,11.378-36.978,0l-62.578-69.689  c-8.533-9.956-8.533-25.6,1.422-35.556c9.956-8.533,25.6-8.533,35.556,1.422l44.089,49.778l129.422-140.8  c9.956-9.956,25.6-11.378,35.556-1.422C359.822,136.533,359.822,153.6,351.289,162.133z" />}
+                    {!isSuccess && <path d="M331.378,331.378c-8.533,8.533-22.756,8.533-31.289,0l-72.533-72.533l-72.533,72.533  c-8.533,8.533-22.756,8.533-31.289,0c-8.533-8.533-8.533-22.756,0-31.289l72.533-72.533l-72.533-72.533  c-8.533-8.533-8.533-22.756,0-31.289c8.533-8.533,22.756-8.533,31.289,0l72.533,72.533l72.533-72.533  c8.533-8.533,22.756-8.533,31.289,0c8.533,8.533,8.533,22.756,0,31.289l-72.533,72.533l72.533,72.533  C339.911,308.622,339.911,322.844,331.378,331.378z" />}
                 </svg>
             </div>
-            <h1 className="center">CONGRATULATIONS !</h1>
+            <h1 className="center">{isSuccess ? 'CONGRATULATIONS !' : 'SERVER ERROR !'}</h1>
             <span className="center">{message}</span>
         </div>
     </div>

@@ -19,50 +19,39 @@ modalMapper.set(MODAL_TYPE.SUCCESS_MODAL, SuccessModal);
 
 class ModalManagementService {
 
-    _result;
     _modal = new Subject();
 
     get modal() {
         return this._modal.asObservable();
     }
 
-    constructor() { }
-
-    openAddMovieModal(modalProps) {
-        this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.ADD_MOVIE_MODAL), modalProps });
-        return this._result.asObservable();
+    openAddMovieModal() {
+        this.closeModal();
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.ADD_MOVIE_MODAL), modalProps: null });
     }
 
-    openUpdateMovieModal(modalProps) {
-        this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.UPDATE_MOVIE_MODAL), modalProps });
-        return this._result.asObservable();
+    openUpdateMovieModal(movieItem) {
+        this.closeModal();
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.UPDATE_MOVIE_MODAL), modalProps: { movieItem } });
     }
 
-    openDeleteMovieModal() {
-        this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.DELETE_MOVIE_MODAL), modalProps: null });
-        return this._result.asObservable();
+    openDeleteMovieModal(movieID) {
+        this.closeModal();
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.DELETE_MOVIE_MODAL), modalProps: { movieID } });
     }
 
     openSuccessModal(message) {
-        this._resetResult();
-        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.SUCCESS_MODAL), modalProps: { message } });
-        return this._result.asObservable();
+        this.closeModal();
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.SUCCESS_MODAL), modalProps: { isSuccess: true, message } });
+    }
+
+    openErrorModal(message) {
+        this.closeModal();
+        this._modal.next({ isModalVisible: true, ModalComponent: modalMapper.get(MODAL_TYPE.SUCCESS_MODAL), modalProps: { isSuccess: false, message } });
     }
 
     closeModal() {
-        this._modal.next({ isModalVisible: false, ModalComponent: null, modalProps: null })
-    }
-
-    emitResult(result) {
-        if (this._result) this._result.next(result);
-    }
-
-    _resetResult() {
-        if (this._result) this._result.complete();
-        this._result = new Subject();
+        this._modal.next({ isModalVisible: false, ModalComponent: null, modalProps: null });
     }
 }
 
