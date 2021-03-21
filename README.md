@@ -33,6 +33,26 @@ Use `npm run test:coverage` to run the test cases configured using `jest`
 npm run test:coverage
 ```
 
+### Instructions to run Backend Server
+
+GitHub Repository with local Movies API Service implementation:
+https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS
+
+To start local Movies API service, you should:
+
+1. Clone Movies API Service repository
+2. Run the following command to install node modules:
+```
+npm i
+```
+3. Run the following command to start Movies API Service:
+```
+npm start
+```
+
+Movies API Service will be available on http://localhost:4000/.
+
+API Swagger documentation will be available on http://localhost:4000/api-docs.
 
 ### Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
