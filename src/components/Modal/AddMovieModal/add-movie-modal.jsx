@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ModalService } from '../modal-service';
 import axios from 'axios';
 import { URLS } from '../../../urls/urls.constant';
 import { connect } from 'react-redux';
 import { refreshMovieDataAction } from '../../../store';
+import { useFormik } from 'formik';
+import { validateMovieData } from '../modal.util';
 
 const AddMovieModal = ({ addMovie }) => {
-    const [title, setTitle] = useState('');
-    const [releaseDate, setReleaseDate] = useState('');
-    const [posterURL, setposterURL] = useState('');
-    const [genre, setGenre] = useState('');
-    const [overview, setOverview] = useState('');
-    const [runtime, setRuntime] = useState('');
+    const genreOptions = ['Documentary', 'Comedy', 'Horror', 'Crime'];
+    const initialValues = { title: '', releaseDate: '', posterURL: '', genre: '', overview: '', runtime: '' };
 
-    const resetData = () => {
-        setTitle('');
-        setReleaseDate('');
-        setposterURL('');
-        setGenre('');
-        setOverview('');
-        setRuntime('');
+    const formik = useFormik({
+        initialValues,
+        validate: validateMovieData,
+        initialErrors: validateMovieData(initialValues)
+    });
+
+    const onSubmit = () => {
+        if (formik.isValid) {
+            const { title, releaseDate, posterURL, genre, overview, runtime } = formik.values;
+            addMovie({ title, release_date: releaseDate, poster_path: posterURL, genres: [genre], overview, runtime })
+        } else {
+            formik.setTouched({ title: true, releaseDate: true, posterURL: true, genre: true, overview: true, runtime: true });
+        }
     }
 
     return (
@@ -38,42 +42,66 @@ const AddMovieModal = ({ addMovie }) => {
                 <form>
                     <div className="form-group">
                         <label>TITLE</label>
-                        <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="Title here" />
+                        <input name="title" type="text" placeholder="Title here"
+                            className={formik.touched.title && formik.errors.title ? 'error' : null}
+                            value={formik.values.title}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.touched.title && formik.errors.title && <span className="error-message">{formik.errors.title}</span>}
                     </div>
                     <div className="form-group">
                         <label>RELEASE DATE</label>
-                        <input value={releaseDate} onChange={e => setReleaseDate(e.target.value)} type="date" placeholder="Select Date" />
+                        <input name="releaseDate" type="date" placeholder="Select Date"
+                            className={formik.touched.releaseDate && formik.errors.releaseDate ? 'error' : null}
+                            value={formik.values.releaseDate}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.touched.releaseDate && formik.errors.releaseDate && <span className="error-message">{formik.errors.releaseDate}</span>}
                     </div>
                     <div className="form-group">
                         <label>POSTER URL</label>
-                        <input value={posterURL} onChange={e => setposterURL(e.target.value)} type="url" placeholder="Poster URL here" />
+                        <input name="posterURL" type="url" placeholder="Poster URL here"
+                            className={formik.touched.posterURL && formik.errors.posterURL ? 'error' : null}
+                            value={formik.values.posterURL}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.touched.posterURL && formik.errors.posterURL && <span className="error-message">{formik.errors.posterURL}</span>}
                     </div>
                     <div className="form-group">
                         <label>GENRE</label>
-                        <select value={genre} onChange={e => setGenre(e.target.value)}>
-                            <option value=''>Select Genre</option>
-                            <option value="Documentary">Documentary</option>
-                            <option value="Comedy">Comedy</option>
-                            <option value="Horror">Horror</option>
-                            <option value="Crime">Crime</option>
-                            <option value="Action">Action</option>
-                            <option value="Thriller">Thriller</option>
-                            <option value="Adventure">Adventure</option>
+                        <select name="genre"
+                            className={formik.touched.genre && formik.errors.genre ? 'error' : null}
+                            value={formik.values.genre}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}>
+                            <option value='' disabled>Select Genre</option>
+                            {genreOptions.map(genre => <option key={genre} value={genre}>{genre}</option>)}
                         </select>
+                        {formik.touched.genre && formik.errors.genre && <span className="error-message">{formik.errors.genre}</span>}
                     </div>
                     <div className="form-group">
                         <label>OVERVIEW</label>
-                        <input value={overview} onChange={e => setOverview(e.target.value)} type="text" placeholder="Overview here" />
+                        <input name="overview" type="text" placeholder="Overview here"
+                            className={formik.touched.overview && formik.errors.overview ? 'error' : null}
+                            value={formik.values.overview}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.touched.overview && formik.errors.overview && <span className="error-message">{formik.errors.overview}</span>}
                     </div>
                     <div className="form-group">
                         <label>RUNTIME</label>
-                        <input value={runtime} onChange={e => setRuntime(e.target.value)} type="number" placeholder="Runtime here" />
+                        <input name="runtime" type="number" placeholder="Runtime here"
+                            className={formik.touched.runtime && formik.errors.runtime ? 'error' : null}
+                            value={formik.values.runtime}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} />
+                        {formik.touched.runtime && formik.errors.runtime && <span className="error-message">{formik.errors.runtime}</span>}
                     </div>
                 </form>
             </div>
             <div className="modal-footer">
-                <button className="secondary clickable" onClick={() => resetData()}>RESET</button>
-                <button className="primary clickable" onClick={() => addMovie({ title, release_date: releaseDate, poster_path: posterURL, genres: [genre], overview, runtime: Number(runtime) })}>SUBMIT</button>
+                <button className="secondary clickable" onClick={formik.resetForm}>RESET</button>
+                <button className="primary clickable" onClick={onSubmit}>SUBMIT</button>
             </div>
         </div>
     );
