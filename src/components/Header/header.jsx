@@ -3,21 +3,34 @@ import './header.scss';
 import { MovieSearch } from './MovieSearch';
 import { MovieDetail } from './MovieDetail';
 import { HeaderNav } from './HeaderNav';
-import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
-const Header = ({ selectedMovieItem }) => {
+export const Header = () => {
     return (
-        <header className={selectedMovieItem ? 'dark-bg' : null}>
-            <div className="header-content">
-                <HeaderNav />
-                {selectedMovieItem ? <MovieDetail movieItem={selectedMovieItem} /> : <MovieSearch />}
-            </div>
-        </header>
+        <Switch>
+            <Route path={["/", "/search/:searchTerm"]} exact>
+                <header>
+                    <div className="header-content">
+                        <HeaderNav />
+                        <MovieSearch />
+                    </div>
+                </header>
+            </Route>
+            <Route path="/film/:movieID" exact>
+                <header className="dark-bg">
+                    <div className="header-content">
+                        <HeaderNav />
+                        <MovieDetail />
+                    </div>
+                </header>
+            </Route>
+            <Route>
+                <header className="bg-none">
+                    <div className="header-content">
+                        <HeaderNav />
+                    </div>
+                </header>
+            </Route>
+        </Switch>
     );
 }
-
-const mapStateToProps = ({ selectedMovieItem }) => ({ selectedMovieItem })
-
-const component = connect(mapStateToProps)(Header);
-
-export { component as Header };

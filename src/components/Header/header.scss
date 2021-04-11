@@ -15,6 +15,11 @@ header {
         background: linear-gradient(rgba($dark, 0.8), rgba($dark, 0.8)), url("../../assets/img/bg-poster.jpg");
     }
 
+    &.bg-none {
+        background-image: none;
+        border-bottom: none;
+    }
+
     div.header-content {
         margin: 0px auto;
         max-width: $default-screen-size;

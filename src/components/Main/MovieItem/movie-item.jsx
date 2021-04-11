@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MovieActionMenu } from '../MovieActionMenu';
-import { connect } from 'react-redux';
-import { updateSelecteMovieAction } from '../../../store';
+import { useHistory } from 'react-router-dom';
 
-const MovieItem = ({ movieItem, updateSelecteMovie }) => {
+export const MovieItem = ({ movieItem }) => {
+    const history = useHistory();
+    const navigateToMovieDetail = movieID => history.push(`/film/${movieID}`)
     const [inHover, setHover] = useState(false);
     return (
-        <div className="movie-item clickable" onClick={() => updateSelecteMovie(movieItem)}
+        <div className="movie-item clickable" onClick={() => navigateToMovieDetail(movieItem.id)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}>
             <img src={movieItem.poster_path} onError={e => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoWcWg0E8pSjBNi0TtiZsqu8uD2PAr_K11DA&usqp=CAU'} />
@@ -26,9 +27,3 @@ const MovieItem = ({ movieItem, updateSelecteMovie }) => {
 MovieItem.propTypes = {
     movieItem: PropTypes.object.isRequired,
 }
-
-const mapDispatchToProps = dispatch => ({ updateSelecteMovie: movieItem => dispatch(updateSelecteMovieAction(movieItem)) })
-
-const component = connect(null, mapDispatchToProps)(MovieItem);
-
-export { component as MovieItem };

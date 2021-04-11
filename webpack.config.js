@@ -6,7 +6,8 @@ module.exports = env => ({
     entry: path.join(__dirname, 'src', 'index.js'),
     output: {
         filename: 'bundle.js',
-        path: path.join(__dirname, 'dist')
+        path: path.join(__dirname, 'dist'),
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.css', '.scss', '.png', '.jpg', '.jpeg', 'gif']
@@ -38,6 +39,7 @@ module.exports = env => ({
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
+        historyApiFallback: true,
         compress: true,
         port: 9000,
         hot: true
