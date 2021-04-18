@@ -4,7 +4,7 @@ import { ModalService } from '../modal-service';
 export const SuccessModal = ({ isSuccess, message }) => (
     <div className="modal-content">
         <div className="modal-action">
-            <div className="modal-close-icon clickable" onClick={() => ModalService.closeModal()}>
+            <div className="modal-close-icon clickable" data-testid="close-icon" onClick={() => ModalService.closeModal()}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 311 311.07733">
                     <path d="m16.035156 311.078125c-4.097656 0-8.195312-1.558594-11.308594-4.695313-6.25-6.25-6.25-16.382812 0-22.632812l279.0625-279.0625c6.25-6.25 16.382813-6.25 22.632813 0s6.25 16.382812 0 22.636719l-279.058594 279.058593c-3.136719 3.117188-7.234375 4.695313-11.328125 4.695313zm0 0" />
                     <path d="m295.117188 311.078125c-4.097657 0-8.191407-1.558594-11.308594-4.695313l-279.082032-279.058593c-6.25-6.253907-6.25-16.386719 0-22.636719s16.382813-6.25 22.636719 0l279.058594 279.0625c6.25 6.25 6.25 16.382812 0 22.632812-3.136719 3.117188-7.230469 4.695313-11.304687 4.695313zm0 0" />
@@ -19,8 +19,8 @@ export const SuccessModal = ({ isSuccess, message }) => (
                     {!isSuccess && <path d="M331.378,331.378c-8.533,8.533-22.756,8.533-31.289,0l-72.533-72.533l-72.533,72.533  c-8.533,8.533-22.756,8.533-31.289,0c-8.533-8.533-8.533-22.756,0-31.289l72.533-72.533l-72.533-72.533  c-8.533-8.533-8.533-22.756,0-31.289c8.533-8.533,22.756-8.533,31.289,0l72.533,72.533l72.533-72.533  c8.533-8.533,22.756-8.533,31.289,0c8.533,8.533,8.533,22.756,0,31.289l-72.533,72.533l72.533,72.533  C339.911,308.622,339.911,322.844,331.378,331.378z" />}
                 </svg>
             </div>
-            <h1 className="center">{isSuccess ? 'CONGRATULATIONS !' : 'SERVER ERROR !'}</h1>
-            <span className="center">{message}</span>
+            <h1 data-testid="header-text" className="center">{isSuccess ? 'CONGRATULATIONS !' : 'SERVER ERROR !'}</h1>
+            <span data-testid="message-text" className="center">{message}</span>
         </div>
     </div>
 );

@@ -1,6 +1,6 @@
 import urlRegexSafe from 'url-regex-safe';
 
-const MOVIE_DATA_REQUIRED_VALIDATION_ERROR_MESSAGES = {
+export const MOVIE_DATA_REQUIRED_VALIDATION_ERROR_MESSAGES = {
     title: 'Title is required',
     releaseDate: 'Release date is required',
     posterURL: 'Poster URL is required',

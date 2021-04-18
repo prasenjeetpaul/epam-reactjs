@@ -7,7 +7,7 @@ import { refreshMovieDataAction } from '../../../store';
 import { useFormik } from 'formik';
 import { validateMovieData } from '../modal.util';
 
-const AddMovieModal = ({ addMovie }) => {
+export const AddMovieModalComponent = ({ addMovie }) => {
     const genreOptions = ['Documentary', 'Comedy', 'Horror', 'Crime'];
     const initialValues = { title: '', releaseDate: '', posterURL: '', genre: '', overview: '', runtime: '' };
 
@@ -107,7 +107,7 @@ const AddMovieModal = ({ addMovie }) => {
     );
 }
 
-const addMovie = dispatch => movieItem => axios.post(URLS.MOVIE_LIST, movieItem)
+export const addMovie = dispatch => movieItem => axios.post(URLS.MOVIE_LIST, movieItem)
     .then(() => {
         ModalService.openSuccessModal('The movie has been added to database successfully.');
         dispatch(refreshMovieDataAction());
@@ -116,6 +116,6 @@ const addMovie = dispatch => movieItem => axios.post(URLS.MOVIE_LIST, movieItem)
 
 const mapDispatchToProps = dispatch => ({ addMovie: addMovie(dispatch) })
 
-const component = connect(null, mapDispatchToProps)(AddMovieModal);
+const component = connect(null, mapDispatchToProps)(AddMovieModalComponent);
 
 export { component as AddMovieModal }

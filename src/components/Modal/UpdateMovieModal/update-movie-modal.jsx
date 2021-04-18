@@ -7,7 +7,7 @@ import { refreshMovieDataAction, updateMovieItemAction } from '../../../store';
 import { useFormik } from 'formik';
 import { validateMovieData } from '../modal.util';
 
-const UpdateMovieModal = ({ movieItem, updateMovie }) => {
+export const UpdateMovieModalComponent = ({ movieItem, updateMovie }) => {
     movieItem.runtime = movieItem.runtime ? movieItem.runtime : '';
     const genreOptions = ['Documentary', 'Comedy', 'Horror', 'Crime'];
     const { title, release_date, poster_path, genres, overview, runtime } = movieItem;
@@ -113,7 +113,7 @@ const UpdateMovieModal = ({ movieItem, updateMovie }) => {
 }
 
 
-const updateMovie = dispatch => movieItem => axios.put(URLS.MOVIE_LIST, movieItem)
+export const updateMovie = dispatch => movieItem => axios.put(URLS.MOVIE_LIST, movieItem)
     .then(data => data.data)
     .then(data => {
         ModalService.openSuccessModal('The movie has been updated successfully.');
@@ -125,6 +125,6 @@ const updateMovie = dispatch => movieItem => axios.put(URLS.MOVIE_LIST, movieIte
 
 const mapDispatchToProps = dispatch => ({ updateMovie: updateMovie(dispatch) })
 
-const component = connect(null, mapDispatchToProps)(UpdateMovieModal);
+const component = connect(null, mapDispatchToProps)(UpdateMovieModalComponent);
 
 export { component as UpdateMovieModal }
