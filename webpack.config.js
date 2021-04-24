@@ -1,6 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+/**
+ * Not used in the current project implemented via SSR.
+ * Keeping the file for future reference.
+ */
 module.exports = env => ({
     mode: env.production ? 'production' : 'development',
     entry: path.join(__dirname, 'src', 'index.js'),
